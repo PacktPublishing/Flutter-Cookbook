@@ -13,17 +13,18 @@ class ImmutableWidget extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Colors.black26,
+            Color(0xAA0d6123),
             Color(0x00000000),
-            Colors.black26,
+            Color(0xAA0d6123),
           ],
         ),
       ),
-      child: Padding(
-        padding: EdgeInsets.all(80),
+      child: Center(
         child: Transform.rotate(
           angle: 180 / Math.pi,
           child: Container(
+            width: 250,
+            height: 250,
             decoration: BoxDecoration(
               color: Colors.purple,
               boxShadow: [
