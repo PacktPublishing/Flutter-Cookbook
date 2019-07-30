@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_layout/e_commerce_screen_before.dart';
+import 'package:flutter_layout/e_commerce_screen_after.dart';
 
 void main() => runApp(StaticApp());
 

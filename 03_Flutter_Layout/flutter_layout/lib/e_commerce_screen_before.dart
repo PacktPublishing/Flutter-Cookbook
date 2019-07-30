@@ -117,7 +117,7 @@ class ECommerceScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(10.0),
                       child: Center(
                         child: Text(
-                          'Must by in summer',
+                          'Must buy in summer',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,
