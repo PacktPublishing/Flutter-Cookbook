@@ -4,13 +4,12 @@ class ECommerceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple,
       appBar: _buildAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: <Widget>[
-            _buildToggleBar(),
+            _buildToggleBar(context),
             Image.asset('assets/woman_shopping.jpg'),
             DealButtons(),
             _buildProductTile(context),
@@ -23,7 +22,7 @@ class ECommerceScreen extends StatelessWidget {
   Widget _buildProductTile(BuildContext context) {
     return Container(
       height: 200,
-      color: Colors.white,
+      color: Theme.of(context).cardColor,
       child: Row(
         children: <Widget>[
           Image.asset(
@@ -53,57 +52,45 @@ class ECommerceScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildToggleBar() {
+  Widget _buildToggleBar(BuildContext context) {
     return Row(
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            'Recommended',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 17,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            'Formal Wear',
-            style: TextStyle(
-              color: Colors.white54,
-              fontSize: 17,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            'Casual Wear',
-            style: TextStyle(
-              color: Colors.white54,
-              fontSize: 17,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
+        _buildToggleItem(context, 'Recommended', selected: true),
+        _buildToggleItem(context, 'Formal Wear'),
+        _buildToggleItem(context, 'Casual Wear'),
       ],
+    );
+  }
+
+  Widget _buildToggleItem(BuildContext context, String text,
+      {bool selected = false}) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 17,
+          color: selected
+              ? null
+              : Theme.of(context).textTheme.title.color.withOpacity(0.5),
+          fontWeight: selected ? FontWeight.bold : null,
+        ),
+      ),
     );
   }
 
   AppBar _buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.purpleAccent,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(30),
+        ),
+      ),
       leading: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Icon(Icons.home),
       ),
-      title: Text('Le\'ts go shopping!'),
-      elevation: 0,
+      title: Text('Let\'s go shopping!'),
       actions: <Widget>[
         Padding(
           padding: const EdgeInsets.all(20.0),
@@ -183,7 +170,6 @@ class DealButton extends StatelessWidget {
               text,
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.white,
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
               ),

@@ -8,7 +8,7 @@ class TextLayout extends StatelessWidget {
       children: <Widget>[
         Text(
           'Hello, World!',
-          style: TextStyle(fontFamily: 'LaeckerliOne', fontSize: 40),
+          style: TextStyle(fontFamily: 'LeckerliOne', fontSize: 40),
         ),
         Text(
           'Text can wrap without issue',

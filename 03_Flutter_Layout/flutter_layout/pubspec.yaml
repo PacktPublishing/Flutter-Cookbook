@@ -36,7 +36,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   fonts:
-    - family: LaeckerliOne
+    - family: LeckerliOne
       fonts:
         - asset: assets/LeckerliOne-Regular.ttf
   assets:

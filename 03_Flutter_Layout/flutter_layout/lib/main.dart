@@ -8,7 +8,22 @@ class StaticApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: Colors.green,
+        appBarTheme: AppBarTheme(
+          elevation: 10,
+          textTheme: TextTheme(
+            title: TextStyle(
+              fontFamily: 'LeckerliOne',
+              fontSize: 24,
+            ),
+          ),
+        ),
+      ),
       home: ECommerceScreen(),
     );
   }
 }
+
+//fontFamily: 'LeckerliOne',

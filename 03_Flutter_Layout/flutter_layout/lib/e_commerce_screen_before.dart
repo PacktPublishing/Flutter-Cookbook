@@ -13,7 +13,7 @@ class ECommerceScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Icon(Icons.home),
         ),
-        title: Text('Le\'ts go shopping!'),
+        title: Text('Let\'s go shopping!'),
         elevation: 0,
         actions: <Widget>[
           Padding(
