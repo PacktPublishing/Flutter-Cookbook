@@ -1,22 +1,31 @@
-class Url {
+class UrlBuilder {
   String scheme;
   String host;
-  String path;
-  String body;
+  List<String> routes;
 
   @override
   String toString() {
-    return '$scheme://$host/$path';
+    assert(scheme != null);
+    assert(host != null);
+    final paths = [host, if (routes != null) ...routes];
+    final path = paths.join('/');
+
+    return '$scheme://$path';
   }
 }
 
 void cascadePlayground() {
-  final url = Url()
+  final url = UrlBuilder()
     ..scheme = 'https'
     ..host = 'dart.dev'
-    ..path = '/guides/language/language-tour#cascade-notation-';
+    ..routes = [
+      'guides',
+      'language',
+      'language-tour#cascade-notation-',
+    ];
 
   print(url);
+}
 
   // You can even use this operator with objects not designed to be builders.
   final largest = [342, 23423, 53, 232, 534]

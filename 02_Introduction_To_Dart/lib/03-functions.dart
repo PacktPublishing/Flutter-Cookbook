@@ -93,16 +93,26 @@ int powerOfTwo({numberGetter getter}) {
 
 // Or don't define the closure ahead of time
 // and just describe it in the function signature
-void callbackExample(void Function(String value) callback) {
+void callbackExample(void callback(String value)) {
   callback('Hello Callback');
 }
 
+void closureInvoker(void Function() aClosure) {
+  aClosure();
+}
+
 void consumeClosure() {
-  final squared = powerOfTwo(
-    getter: () {
-      return 4;
-    },
-  );
+  final firstClassFunction = () {
+    print('I am a closure!');
+  };
+
+  closureInvoker(firstClassFunction);
+  closureInvoker(() {
+    print('I am written inline');
+  });
+
+  final getFour = () => 4;
+  final squared = powerOfTwo(getter: getFour);
   print(squared);
 
   callbackExample((result) {
