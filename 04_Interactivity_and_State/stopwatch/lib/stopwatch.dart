@@ -8,15 +8,16 @@ class StopWatch extends StatefulWidget {
 }
 
 class StopWatchState extends State<StopWatch> {
-  int seconds;
+  bool isTicking = false;
+  int milliseconds = 0;
   Timer timer;
 
-  @override
-  void initState() {
-    super.initState();
+  final laps = <int>[];
 
-    seconds = 0;
-    timer = Timer.periodic(Duration(seconds: 1), _onTick);
+  void _onTick(Timer time) {
+    setState(() {
+      milliseconds += 100;
+    });
   }
 
   @override
@@ -25,21 +26,99 @@ class StopWatchState extends State<StopWatch> {
       appBar: AppBar(
         title: Text('Stopwatch'),
       ),
-      body: Center(
-        child: Text(
-          '$seconds ${_secondsText()}',
-          style: Theme.of(context).textTheme.headline,
-        ),
+      body: Column(
+        children: <Widget>[
+          SizedBox(height: 30),
+          _buildCounter(context),
+          SizedBox(height: 20),
+          _buildButtonRow(),
+          _buildLapDisplay(),
+        ],
       ),
     );
   }
 
-  String _secondsText() => seconds == 1 ? 'second' : 'seconds';
+  Column _buildCounter(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Text(
+          'Lap ${laps.length + 1}',
+          style: Theme.of(context).textTheme.subhead,
+        ),
+        Text(
+          _secondsText(milliseconds),
+          style: Theme.of(context).textTheme.headline,
+        ),
+      ],
+    );
+  }
 
-  void _onTick(Timer time) {
+  Widget _buildButtonRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        RaisedButton(
+            color: Colors.green,
+            textColor: Colors.white,
+            child: Text('Start'),
+            onPressed: isTicking ? null : _startTimer),
+        SizedBox(width: 20),
+        RaisedButton(
+          color: Colors.yellow,
+          child: Text('Lap'),
+          onPressed: isTicking ? _lap : null,
+        ),
+        SizedBox(width: 20),
+        FlatButton(
+          color: Colors.red,
+          textColor: Colors.white,
+          child: Text('Stop'),
+          onPressed: isTicking ? _stopTimer : null,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildLapDisplay() {
+    return Flexible(
+      child: ListView(
+        children: laps.map((milliseconds) {
+          return ListTile(
+            title: Text(_secondsText(milliseconds)),
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  void _startTimer() {
+    timer = Timer.periodic(Duration(milliseconds: 100), _onTick);
+
     setState(() {
-      ++seconds;
+      milliseconds = 0;
+      laps.clear();
+      isTicking = true;
     });
+  }
+
+  void _stopTimer() {
+    timer.cancel();
+
+    setState(() {
+      isTicking = false;
+    });
+  }
+
+  void _lap() {
+    setState(() {
+      laps.add(milliseconds);
+      milliseconds = 0;
+    });
+  }
+
+  String _secondsText(int milliseconds) {
+    final seconds = milliseconds / 1000;
+    return '$seconds seconds';
   }
 
   @override
