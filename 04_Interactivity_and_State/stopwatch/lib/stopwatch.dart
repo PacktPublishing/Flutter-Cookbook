@@ -28,32 +28,41 @@ class StopWatchState extends State<StopWatch> {
       ),
       body: Column(
         children: <Widget>[
-          SizedBox(height: 30),
-          _buildCounter(context),
-          SizedBox(height: 20),
-          _buildButtonRow(),
-          _buildLapDisplay(),
+          Expanded(child: _buildCounter(context)),
+          Expanded(child: _buildLapDisplay()),
         ],
       ),
     );
   }
 
-  Column _buildCounter(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Text(
-          'Lap ${laps.length + 1}',
-          style: Theme.of(context).textTheme.subhead,
-        ),
-        Text(
-          _secondsText(milliseconds),
-          style: Theme.of(context).textTheme.headline,
-        ),
-      ],
+  Widget _buildCounter(BuildContext context) {
+    return Container(
+      color: Theme.of(context).primaryColor,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            'Lap ${laps.length + 1}',
+            style: Theme.of(context)
+                .textTheme
+                .subhead
+                .copyWith(color: Colors.white),
+          ),
+          Text(
+            _secondsText(milliseconds),
+            style: Theme.of(context)
+                .textTheme
+                .headline
+                .copyWith(color: Colors.white),
+          ),
+          SizedBox(height: 20),
+          _buildControls(),
+        ],
+      ),
     );
   }
 
-  Widget _buildButtonRow() {
+  Widget _buildControls() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -80,14 +89,14 @@ class StopWatchState extends State<StopWatch> {
   }
 
   Widget _buildLapDisplay() {
-    return Flexible(
-      child: ListView(
-        children: laps.map((milliseconds) {
-          return ListTile(
+    return ListView(
+      physics: BouncingScrollPhysics(),
+      children: [
+        for (int milliseconds in laps)
+          ListTile(
             title: Text(_secondsText(milliseconds)),
-          );
-        }).toList(),
-      ),
+          )
+      ],
     );
   }
 
@@ -102,9 +111,8 @@ class StopWatchState extends State<StopWatch> {
   }
 
   void _stopTimer() {
-    timer.cancel();
-
     setState(() {
+      timer.cancel();
       isTicking = false;
     });
   }
