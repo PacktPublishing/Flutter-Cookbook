@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:stopwatch/platform_alert.dart';
 
 class StopWatch extends StatefulWidget {
-  static const routeName = '/stopwatch';
+  static const route = '/stopwatch';
 
   final String name;
   final String email;
@@ -31,7 +32,7 @@ class StopWatchState extends State<StopWatch> {
 
   @override
   Widget build(BuildContext context) {
-    String name = ModalRoute.of(context).settings.arguments;
+    String name = getName(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -44,6 +45,11 @@ class StopWatchState extends State<StopWatch> {
         ],
       ),
     );
+  }
+
+  String getName(BuildContext context) {
+    final name = ModalRoute.of(context).settings?.arguments ?? null;
+    return name is String ? name : 'Stopwatch';
   }
 
   Widget _buildCounter(BuildContext context) {
@@ -132,6 +138,13 @@ class StopWatchState extends State<StopWatch> {
       timer.cancel();
       isTicking = false;
     });
+
+    final totalRuntime = laps.fold(milliseconds, (total, lap) => total + lap);
+    final alert = PlatformAlert(
+      title: 'Run Completed!',
+      message: 'Total Run Time is ${_secondsText(totalRuntime)}.',
+    );
+    alert.show(context);
   }
 
   void _lap() {
@@ -141,8 +154,8 @@ class StopWatchState extends State<StopWatch> {
     });
 
     scrollController.animateTo(
-      itemHeight * laps.length,
-      duration: Duration(milliseconds: 500),
+      itemHeight * laps.length - 3,
+      duration: Duration(milliseconds: 100),
       curve: Curves.easeIn,
     );
   }

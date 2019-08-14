@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stopwatch/stopwatch.dart';
 
 class LoginScreen extends StatefulWidget {
-  static const routeName = '/login';
+  static const route = '/login';
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -74,9 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     final name = _nameController.text;
-
-    Navigator.of(context).pushNamedAndRemoveUntil(
-        StopWatch.routeName, (_) => false,
+    Navigator.of(context).pushNamedAndRemoveUntil(StopWatch.route, (_) => false,
         arguments: name);
   }
 }
