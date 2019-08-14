@@ -3,6 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class StopWatch extends StatefulWidget {
+  final String name;
+  final String email;
+
+  const StopWatch({Key key, this.name, this.email}) : super(key: key);
+
   @override
   State createState() => StopWatchState();
 }
@@ -26,7 +31,7 @@ class StopWatchState extends State<StopWatch> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Stopwatch'),
+        title: Text(widget.name),
       ),
       body: Column(
         children: <Widget>[
@@ -94,8 +99,8 @@ class StopWatchState extends State<StopWatch> {
     return Scrollbar(
       child: ListView.builder(
         controller: scrollController,
-        itemCount: laps.length,
         itemExtent: itemHeight,
+        itemCount: laps.length,
         itemBuilder: (context, index) {
           final milliseconds = laps[index];
           return ListTile(
