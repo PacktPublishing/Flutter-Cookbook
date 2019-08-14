@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:stopwatch/stopwatch.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const routeName = '/login';
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -72,13 +74,9 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     final name = _nameController.text;
-    final email = _emailController.text;
 
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (_) => StopWatch(name: name, email: email),
-          fullscreenDialog: true,
-        ),
-        (_) => false);
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        StopWatch.routeName, (_) => false,
+        arguments: name);
   }
 }
