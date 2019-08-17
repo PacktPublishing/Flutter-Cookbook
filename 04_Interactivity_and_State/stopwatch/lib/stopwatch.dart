@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:stopwatch/platform_alert.dart';
 
 class StopWatch extends StatefulWidget {
   static const route = '/stopwatch';
@@ -95,11 +94,13 @@ class StopWatchState extends State<StopWatch> {
           onPressed: isTicking ? _lap : null,
         ),
         SizedBox(width: 20),
-        FlatButton(
-          color: Colors.red,
-          textColor: Colors.white,
-          child: Text('Stop'),
-          onPressed: isTicking ? _stopTimer : null,
+        Builder(
+          builder: (context) => FlatButton(
+            color: Colors.red,
+            textColor: Colors.white,
+            child: Text('Stop'),
+            onPressed: isTicking ? () => _stopTimer(context) : null,
+          ),
         ),
       ],
     );
@@ -133,18 +134,35 @@ class StopWatchState extends State<StopWatch> {
     });
   }
 
-  void _stopTimer() {
+  void _stopTimer(BuildContext context) {
     setState(() {
       timer.cancel();
       isTicking = false;
     });
 
+    final controller =
+        showBottomSheet(context: context, builder: _buildRunCompleteSheet);
+
+    Future.delayed(Duration(seconds: 5)).then((_) {
+      controller.close();
+    });
+  }
+
+  Widget _buildRunCompleteSheet(BuildContext context) {
     final totalRuntime = laps.fold(milliseconds, (total, lap) => total + lap);
-    final alert = PlatformAlert(
-      title: 'Run Completed!',
-      message: 'Total Run Time is ${_secondsText(totalRuntime)}.',
-    );
-    alert.show(context);
+    final textTheme = Theme.of(context).textTheme;
+
+    return SafeArea(
+        child: Container(
+      color: Theme.of(context).cardColor,
+      width: double.infinity,
+      child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 30.0),
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+            Text('Run Finished!', style: textTheme.title),
+            Text('Total Run Time is ${_secondsText(totalRuntime)}.')
+          ])),
+    ));
   }
 
   void _lap() {
