@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:master_plan/models/data_layer.dart';
+import 'package:master_plan/plan_provider.dart';
 
 class PlanScreen extends StatefulWidget {
   @override
@@ -7,33 +8,51 @@ class PlanScreen extends StatefulWidget {
 }
 
 class _PlanScreenState extends State<PlanScreen> {
-  final plan = Plan();
-  final textControllers = [];
+  ScrollController scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController = ScrollController()
+      ..addListener(() {
+        FocusScope.of(context).requestFocus(FocusNode());
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final plan = PlanProvider.of(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Master Plan'),
-      ),
-      body: ListView.builder(
-        itemCount: plan.tasks.length,
-        itemBuilder: (context, index) =>
-            _buildTaskTile(plan.tasks[index], textControllers[index]),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          setState(() {
-            plan.tasks.add(Task());
-            textControllers.add(TextEditingController());
-          });
-        },
-      ),
+        appBar: AppBar(title: Text('Master Plan')),
+        body: Column(children: <Widget>[
+          Expanded(child: _buildList()),
+          SafeArea(child: Text(plan.completenessMessage))
+        ]),
+        floatingActionButton: _buildAddTaskButton());
+  }
+
+  Widget _buildAddTaskButton() {
+    final plan = PlanProvider.of(context);
+    return FloatingActionButton(
+      child: Icon(Icons.add),
+      onPressed: () {
+        setState(() {
+          plan.tasks.add(Task());
+        });
+      },
     );
   }
 
-  Widget _buildTaskTile(Task task, TextEditingController controller) {
+  Widget _buildList() {
+    final plan = PlanProvider.of(context);
+    return ListView.builder(
+      controller: scrollController,
+      itemCount: plan.tasks.length,
+      itemBuilder: (context, index) => _buildTaskTile(plan.tasks[index]),
+    );
+  }
+
+  Widget _buildTaskTile(Task task) {
     return ListTile(
       leading: Checkbox(
           value: task.complete,
@@ -42,14 +61,20 @@ class _PlanScreenState extends State<PlanScreen> {
               task.complete = selected;
             });
           }),
-      title: TextField(
-        controller: controller,
-        onChanged: (text) {
+      title: TextFormField(
+        initialValue: task.description,
+        onFieldSubmitted: (text) {
           setState(() {
             task.description = text;
           });
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 }
