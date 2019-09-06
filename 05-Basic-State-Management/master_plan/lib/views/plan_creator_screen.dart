@@ -84,9 +84,6 @@ class _PlanCreatorScreenState extends State<PlanCreatorScreen> {
 
   void addPlan() {
     final text = textController.text;
-    if (text.isEmpty) {
-      return;
-    }
 
     final controller = PlanProvider.of(context);
     controller.addNewPlan(text);
