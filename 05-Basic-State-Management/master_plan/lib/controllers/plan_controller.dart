@@ -16,6 +16,10 @@ class PlanController {
     services.createPlan(name);
   }
 
+  void savePlan(Plan plan) {
+    services.savePlan(plan);
+  }
+
   void deletePlan(Plan plan) {
     services.delete(plan);
   }
@@ -33,10 +37,6 @@ class PlanController {
 
   void deleteTask(Plan plan, Task task) {
     services.deleteTask(plan, task);
-  }
-
-  void savePlan(Plan plan) {
-    services.savePlan(plan);
   }
 
   String _checkForDuplicates(Iterable<String> items, String text) {

@@ -1,15 +1,12 @@
 import 'package:master_plan/repositories/repository.dart';
+import 'package:meta/meta.dart';
 
 class Task {
   final int id;
   String description;
   bool complete;
 
-  Task({
-    this.id,
-    this.complete = false,
-    this.description = '',
-  });
+  Task({@required this.id, this.complete = false, this.description = ''});
 
   Task.fromModel(Model model)
       : id = model.id,

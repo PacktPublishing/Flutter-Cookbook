@@ -1,28 +1,28 @@
 import 'package:master_plan/models/data_layer.dart';
 import 'package:master_plan/models/plan.dart';
-import 'package:master_plan/repositories/in_memory_repository.dart';
+import 'package:master_plan/repositories/in_memory_cache.dart';
 import 'package:master_plan/repositories/repository.dart';
 
 class PlanServices {
-  final Repository repository = InMemoryRepository();
+  final Repository _repository = InMemoryCache();
 
   Plan createPlan(String name) {
-    final model = repository.create();
+    final model = _repository.create();
     final plan = Plan.fromModel(model)..name = name;
     savePlan(plan);
     return plan;
   }
 
   void savePlan(Plan plan) {
-    repository.update(plan.toModel());
+    _repository.update(plan.toModel());
   }
 
   void delete(Plan plan) {
-    repository.delete(plan.toModel());
+    _repository.delete(plan.toModel());
   }
 
   List<Plan> getAllPlans() {
-    return repository
+    return _repository
         .getAll()
         .map<Plan>((model) => Plan.fromModel(model))
         .toList();

@@ -10,8 +10,7 @@ class PlanProvider extends InheritedWidget {
   bool updateShouldNotify(InheritedWidget oldWidget) => false;
 
   static PlanController of(BuildContext context) {
-    final provider =
-        context.inheritFromWidgetOfExactType(PlanProvider) as PlanProvider;
+    PlanProvider provider = context.inheritFromWidgetOfExactType(PlanProvider);
     return provider._controller;
   }
 }
