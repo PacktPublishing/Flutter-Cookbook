@@ -22,7 +22,7 @@ class ScreenChooser extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Red Screen of Doom!'),
+        title: Text('Red Screen of Death!'),
       ),
       body: ListView(
         children: <Widget>[
@@ -35,7 +35,7 @@ class ScreenChooser extends StatelessWidget {
             onTapped: (_) => FullScreenError(),
           ),
           ErrorTile(
-            text: 'Partial Exploded Widget',
+            text: 'Partially Exploded Widget',
             onTapped: (_) => PartialError(),
           )
         ],
@@ -79,8 +79,7 @@ class FullScreenError extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Full Screen Error')),
       body: Center(
-        child: Text(message),
-      ),
+          child: Text(message, style: Theme.of(context).textTheme.display3)),
     );
   }
 }
@@ -90,7 +89,8 @@ class PartialError extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Mostly Working')),
-      body: GridView(
+      body: GridView.count(
+        crossAxisCount: 2,
         children: <Widget>[
           Tile(color: Colors.green),
           Tile(color: Colors.purple),
@@ -101,8 +101,6 @@ class PartialError extends StatelessWidget {
           Tile(color: Colors.cyan),
           Tile(color: Colors.yellow),
         ],
-        gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       ),
     );
   }
@@ -116,6 +114,12 @@ class Tile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final numbers = [1,3,5,7];
+    final firstEven = numbers.firstWhere((num) => num.isEven);
+    print('This line will never get executed.');
+
+
     return Container(
       color: color,
       decoration: decoration,
