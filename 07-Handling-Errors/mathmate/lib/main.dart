@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,9 +11,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MathMate',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
-      home: MathApp(title: 'Flutter Demo Home Page'),
+      home: MathApp(title: 'Math Mate'),
     );
   }
 }
@@ -85,6 +86,8 @@ class _MathAppState extends State<MathApp> {
           width: 20,
           child: TextField(
             controller: controller,
+            keyboardType: TextInputType.number,
+            inputFormatters: [NumberFormatter()],
           )),
     );
   }
@@ -126,8 +129,14 @@ class _MathAppState extends State<MathApp> {
   void solveEquation() {
     FocusScope.of(context).requestFocus(FocusNode());
 
-    final a = int.parse(controllerA.text);
-    final b = int.parse(controllerB.text);
+    int a, b;
+    try {
+      a = int.parse(controllerA.text);
+      b = int.parse(controllerB.text);
+    } catch (e) {
+      showMessage('Please enter a valid number');
+      return;
+    }
 
     num result;
 
@@ -158,5 +167,37 @@ class _MathAppState extends State<MathApp> {
     controllerA.dispose();
     controllerB.dispose();
     super.dispose();
+  }
+
+  void showMessage(String text) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Text(text),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
+}
+
+class NumberFormatter implements TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    try {
+      final _ = int.parse(newValue.text);
+      return newValue;
+    } catch (e) {
+      return oldValue;
+    }
   }
 }
