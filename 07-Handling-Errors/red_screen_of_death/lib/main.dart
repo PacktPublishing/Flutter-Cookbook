@@ -27,8 +27,7 @@ class ScreenChooser extends StatelessWidget {
       body: ListView(
         children: <Widget>[
           ListTile(
-            leading:
-                Text('These screens do not work.  See if you can fix them!'),
+            title: Text('These screens do not work.  See if you can fix them!'),
           ),
           ErrorTile(
             text: 'Full Screen Error',
@@ -114,12 +113,6 @@ class Tile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final numbers = [1,3,5,7];
-    final firstEven = numbers.firstWhere((num) => num.isEven);
-    print('This line will never get executed.');
-
-
     return Container(
       color: color,
       decoration: decoration,
