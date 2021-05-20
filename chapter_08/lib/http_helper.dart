@@ -11,7 +11,7 @@ class HttpHelper {
   final String deletePath = 'pizza';
 
   Future<List<Pizza>> getPizzaList() async {
-    Uri url = Uri.http(authority, path);
+    Uri url = Uri.https(authority, path);
     http.Response result = await http.get(url);
     if (result.statusCode == HttpStatus.ok) {
       final jsonResponse = json.decode(result.body);
@@ -20,13 +20,13 @@ class HttpHelper {
           jsonResponse.map<Pizza>((i) => Pizza.fromJson(i)).toList();
       return pizzas;
     } else {
-      return null;
+      return [];
     }
   }
 
   Future<String> postPizza(Pizza pizza) async {
     String post = json.encode(pizza.toJson());
-    Uri url = Uri.http(authority, postPath);
+    Uri url = Uri.https(authority, postPath);
     http.Response r = await http.post(
       url,
       body: post,
@@ -36,7 +36,7 @@ class HttpHelper {
 
   Future<String> putPizza(Pizza pizza) async {
     String put = json.encode(pizza.toJson());
-    Uri url = Uri.http(authority, putPath);
+    Uri url = Uri.https(authority, putPath);
     http.Response r = await http.put(
       url,
       body: put,
@@ -45,7 +45,7 @@ class HttpHelper {
   }
 
   Future<String> deletePizza(int id) async {
-    Uri url = Uri.http(authority, deletePath);
+    Uri url = Uri.https(authority, deletePath);
     http.Response r = await http.delete(
       url,
     );

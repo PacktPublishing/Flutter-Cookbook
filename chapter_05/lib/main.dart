@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:master_plan/plan_provider.dart';
-import 'package:master_plan/views/plan_creator_screen.dart';
+import 'package:stopwatch/login_screen.dart';
+import './stopwatch.dart';
 
-void main() => runApp(PlanProvider(child: MasterPlanApp()));
+void main() => runApp(StopwatchApp());
 
-class MasterPlanApp extends StatelessWidget {
+class StopwatchApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.purple),
-      home: PlanCreatorScreen(),
+      routes: {
+        '/': (context) => LoginScreen(),
+        LoginScreen.route: (context) => LoginScreen(),
+        StopWatch.route: (context) => StopWatch(),
+      },
+      initialRoute: '/',
+      
     );
   }
 }
