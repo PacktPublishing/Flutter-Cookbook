@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:store_data/pizza.dart';
+
+import 'httphelper.dart';
+import 'pizza_detail.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,44 +33,24 @@ class _MyHomePageState extends State<MyHomePage> {
   final myKey = 'myPass';
   final pwdController = TextEditingController();
   String myPass = '';
+
   @override
   void initState() {
+    callPizzas();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Path Provider')),
-      body: Container(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                TextField(
-                  controller: pwdController,
-                ),
-                ElevatedButton(
-                    child: Text('Save Value'),
-                    onPressed: () {
-                      writeToSecureStorage();
-                    }),
-                ElevatedButton(
-                    child: Text('Read Value'),
-                    onPressed: () {
-                      readFromSecureStorage().then((value) {
-                        setState(() {
-                          myPass = value;
-                        });
-                      });
-                    }),
-                Text(myPass),
-              ],
-            ),
-          ),
-        ),
-      ),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PizzaDetail()),
+            );
+          }),
     );
   }
 
@@ -77,5 +61,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<String> readFromSecureStorage() async {
     String secret = await storage.read(key: myKey);
     return secret;
+  }
+
+  Future<List<Pizza>> callPizzas() async {
+    HttpHelper helper = HttpHelper();
+    List<Pizza> pizzas = await helper.getPizzaList();
+    return pizzas;
   }
 }
