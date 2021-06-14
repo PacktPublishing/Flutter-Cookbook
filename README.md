@@ -1,2 +1,2 @@
-# Flutter-Cookbook
-Flutter Cookbook, published by Packt
+# Google Flutter 2.2 Cookbook
+Google Flutter 2.2 Cookbook, published by Packt
