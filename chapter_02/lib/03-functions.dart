@@ -72,7 +72,7 @@ void optionalParameters() {
 
   // Notice how parameters can be in any order
   // Flutter uses this a lot.  You should too.
-  named(greeting: 'Geetings and Salutations');
+  named(greeting: 'Greetings and Salutations');
   named(name: 'Sonia');
   named(name: 'Alex', greeting: 'Bonjour');
 
