@@ -63,7 +63,7 @@ wrote his first program when he was 12. It was a text-based fantasy game for the
 career had him working on video games, eCommerce, productivity, finance, and travel apps. After spending years working as an iOS and Android developer, he sees Flutter as the next big pillar for mobile.
 
 
-## Other books by the authors
+## Other books by the author
 * [Flutter Projects](https://www.packtpub.com/product/flutter-projects/9781838647773?utm_source=github&utm_medium=repository&utm_campaign=9781838647773)
 
 
