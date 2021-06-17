@@ -4,7 +4,7 @@
 
 This is the code repository for [Flutter Cookbook](https://www.packtpub.com/product/google-flutter-2-cookbook/9781838823382?utm_source=github&utm_medium=repository&utm_campaign=9781838823382), published by Packt.
 
-**Over 100 proven techniques and solutions for app development with Flutter 2 and Dart**
+**Over 100 proven techniques and solutions for app development with Flutter 2.2 and Dart**
 
 ## What is this book about?
 Flutter is an open-source framework for building mobile, web, and desktop apps using the Dart language. With this recipe-based guide, which focuses on robust app design and core principles, you’ll learn how to solve cross-platform development issues in a practical way.
