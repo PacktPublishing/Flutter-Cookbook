@@ -1,6 +1,6 @@
 # Flutter Cookbook
 
-<a href="https://www.packtpub.com/product/google-flutter-2-cookbook/9781838823382?utm_source=github&utm_medium=repository&utm_campaign=9781838823382"><img src="https://static.packt-cdn.com/products/9781838823382/cover/smaller" alt="Flutter Cookbook" height="256px" align="right"></a>
+<a href="https://www.packtpub.com/product/google-flutter-2-cookbook/9781838823382?utm_source=github&utm_medium=repository&utm_campaign=9781838823382"><img src="https://github.com/PacktPublishing/Flutter-Cookbook/blob/master/Cover%20image.png" alt="Flutter Cookbook" height="256px" align="right"></a>
 
 This is the code repository for [Flutter Cookbook](https://www.packtpub.com/product/google-flutter-2-cookbook/9781838823382?utm_source=github&utm_medium=repository&utm_campaign=9781838823382), published by Packt.
 
