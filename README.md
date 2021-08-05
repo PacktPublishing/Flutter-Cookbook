@@ -51,6 +51,9 @@ With the following software and hardware list you can run all code files present
 
 In order to create apps for iOS, you will need a Mac.
 
+## Errata
+* Page 66, Section: How to do it... Step 3(code snippet line 3): **final MapString, int ages = { ...** _should be_ **final Map ages = { ...**
+
 
 We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](https://static.packt-cdn.com/downloads/9781838823382_ColorImages.pdf).
 
