@@ -27,7 +27,7 @@ void listPlayground() {
 
 void mapPlayground() {
   // Map Literal syntax
-  final ages = {
+  final Map ages = {
     'Mike': 18,
     'Peter': 35,
     'Jennifer': 26,
