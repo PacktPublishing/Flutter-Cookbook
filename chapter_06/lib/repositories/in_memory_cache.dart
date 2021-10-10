@@ -1,13 +1,13 @@
 import 'repository.dart';
 
 class InMemoryCache implements Repository {
-  final _storage = Map<int, Model>();
+  final _storage = <int, Model>{};
 
   @override
   Model create() {
     final ids = _storage.keys.toList()..sort();
 
-    final id = (ids.length == 0) ? 1 : ids.last + 1;
+    final id = (ids.isEmpty) ? 1 : ids.last + 1;
 
     final model = Model(id: id);
     _storage[id] = model;
@@ -15,7 +15,7 @@ class InMemoryCache implements Repository {
   }
 
   @override
-  Model get(int id) {
+  Model? get(int id) {
     return _storage[id];
   }
 

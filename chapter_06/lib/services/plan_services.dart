@@ -3,7 +3,7 @@ import '../repositories/in_memory_cache.dart';
 import '../repositories/repository.dart';
 
 class PlanServices {
-  Repository _repository = InMemoryCache();
+  final Repository _repository = InMemoryCache();
 
   Plan createPlan(String name) {
     final model = _repository.create();
@@ -28,7 +28,10 @@ class PlanServices {
   }
 
   void addTask(Plan plan, String description) {
-    final id = plan.tasks.last?.id ?? 0 + 1;
+    int id = 0;
+    if (plan.tasks.isNotEmpty) {
+      id = plan.tasks.last.id + 1;
+    }
     final task = Task(id: id, description: description);
     plan.tasks.add(task);
     savePlan(plan);
