@@ -5,9 +5,8 @@ class PlatformAlert {
   final String title;
   final String message;
 
-  const PlatformAlert({@required this.title, @required this.message})
-      : assert(title != null),
-        assert(message != null);
+  const PlatformAlert({required this.title, required this.message});
+
   void show(BuildContext context) {
     final platform = Theme.of(context).platform;
 
@@ -42,7 +41,7 @@ class PlatformAlert {
               content: Text(message),
               actions: [
                 CupertinoButton(
-                    child: Text('Close'),
+                    child: const Text('Close'),
                     onPressed: () => Navigator.of(context).pop())
               ]);
         });
