@@ -3,17 +3,16 @@ import 'package:cookbook_ch_07/navigation_first.dart';
 import 'package:flutter/material.dart';
 import 'package:async/async.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 
-import 'location_screen.dart';
+import 'geolocation.dart';
 import 'navigation_dialog.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,20 +21,22 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: NavigationDialog(),
+      home: const NavigationDialog(),
     );
   }
 }
 
 class FuturePage extends StatefulWidget {
+  const FuturePage({Key? key}) : super(key: key);
+
   @override
   _FuturePageState createState() => _FuturePageState();
 }
 
 class _FuturePageState extends State<FuturePage> {
-  String result;
-  Completer completer;
-  Future<int> getNumber() {
+  String result = "";
+  late Completer completer;
+  Future getNumber() {
     completer = Completer<int>();
     calculate();
     return completer.future;
@@ -50,31 +51,22 @@ class _FuturePageState extends State<FuturePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Back from the Future'),
+        title: const Text('Back from the Future'),
       ),
       body: Center(
         child: Column(children: [
-          Spacer(),
+          const Spacer(),
           ElevatedButton(
-            child: Text('GO!'),
+            child: const Text('GO!'),
             onPressed: () {
-              returnError()
-              .then((value){
-                setState(() {
-                  result = 'Success';
-                });
-              }).catchError((onError){
-                setState(() {
-                  result = onError;
-                });
-              }).whenComplete(() => print('Complete'));
+              handleError();
             },
           ),
-          Spacer(),
+          constSpacer(),
           Text(result.toString()),
-          Spacer(),
-          CircularProgressIndicator(),
-          Spacer(),
+          const Spacer(),
+          const CircularProgressIndicator(),
+          const Spacer(),
         ]),
       ),
     );
@@ -111,11 +103,11 @@ class _FuturePageState extends State<FuturePage> {
     futureGroup.add(returnTwoAsync());
     futureGroup.add(returnThreeAsync());
     futureGroup.close();
-    futureGroup.future.then((List <int> value) {
+    futureGroup.future.then((List<int> value) {
       int total = 0;
-      value.forEach((element) { 
+      for (var element in value) {
         total += element;
-      });
+      }
       setState(() {
         result = total.toString();
       });
@@ -126,9 +118,15 @@ class _FuturePageState extends State<FuturePage> {
     throw ('Something terrible happened!');
   }
 
-  Future<Position> getPosition() async {
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    return position;
+  Future handleError() async {
+    try {
+      await returnError();
+    } catch (error) {
+      setState(() {
+        result = error.toString();
+      });
+    } finally {
+      print('Complete');
+    }
   }
-
 }

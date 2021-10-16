@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
-
 import 'navigation_second.dart';
 
 class NavigationFirst extends StatefulWidget {
+  const NavigationFirst({Key? key}) : super(key: key);
+
   @override
   _NavigationFirstState createState() => _NavigationFirstState();
 }
 
 class _NavigationFirstState extends State<NavigationFirst> {
-  Color color = Colors.blue[700];
+  Color color = Colors.blue;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: color,
       appBar: AppBar(
-        title: Text('Navigation First Screen'),
+        title: const Text('Navigation First Screen'),
       ),
       body: Center(
         child: ElevatedButton(
-            child: Text('Change Color'),
+            child: const Text('Change Color'),
             onPressed: () {
               _navigateAndGetColor(context);
             }),
