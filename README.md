@@ -53,6 +53,7 @@ In order to create apps for iOS, you will need a Mac.
 
 ## Errata
 * Page 66, Section: How to do it... Step 3(code snippet line 3): **final MapString, int ages = { ...** _should be_ **final Map ages = { ...**
+* Page 133, top line of text on the page : **5. Fill in the Flexible section. Don't forget to hot reload while writing the code:** _should be_ **5. Fill in the _buildFlexible method. Don't forget to hot reload while writing the code:**
 
 <hr>
 
