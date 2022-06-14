@@ -1,7 +1,3 @@
-## [Get this title for $10 on Packt's Spring Sale](https://www.packt.com/B14720?utm_source=github&utm_medium=packt-github-repo&utm_campaign=spring_10_dollar_2022)
------
-For a limited period, all eBooks and Videos are only $10. All the practical content you need \- by developers, for developers
-
 # Flutter Cookbook
 
 <a href="https://www.packtpub.com/product/google-flutter-2-cookbook/9781838823382?utm_source=github&utm_medium=repository&utm_campaign=9781838823382"><img src="https://github.com/PacktPublishing/Flutter-Cookbook/blob/master/Cover%20image.png" alt="Flutter Cookbook" height="256px" align="right"></a>
