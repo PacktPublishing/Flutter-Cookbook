@@ -1,3 +1,15 @@
+
+### Get this product for $5
+
+<i>Packt is having its biggest sale of the year. Get this eBook or any other book, video, or course that you like just for $5 each</i>
+
+
+<b><p align='center'>[Buy now](https://packt.link/9781838823382)</p></b>
+
+
+<b><p align='center'>[Buy similar titles for just $5](https://subscription.packtpub.com/search)</p></b>
+
+
 # Flutter Cookbook
 
 <a href="https://www.packtpub.com/product/google-flutter-2-cookbook/9781838823382?utm_source=github&utm_medium=repository&utm_campaign=9781838823382"><img src="https://github.com/PacktPublishing/Flutter-Cookbook/blob/master/Cover%20image.png" alt="Flutter Cookbook" height="256px" align="right"></a>
