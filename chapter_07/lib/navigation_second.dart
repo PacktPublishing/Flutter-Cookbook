@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class NavigationSecond extends StatefulWidget {
+  const NavigationSecond({Key? key}) : super(key: key);
+
   @override
   _NavigationSecondState createState() => _NavigationSecondState();
 }
@@ -11,28 +13,28 @@ class _NavigationSecondState extends State<NavigationSecond> {
     Color color;
     return Scaffold(
         appBar: AppBar(
-          title: Text('Navigation Second Screen'),
+          title: const Text('Navigation Second Screen'),
         ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               ElevatedButton(
-                  child: Text('Red'),
+                  child: const Text('Red'),
                   onPressed: () {
-                    color = Colors.red[700];
+                    color = Colors.red;
                     Navigator.pop(context, color);
                   }),
               ElevatedButton(
-                  child: Text('Green'),
+                  child: const Text('Green'),
                   onPressed: () {
-                    color = Colors.green[700];
+                    color = Colors.green;
                     Navigator.pop(context, color);
                   }),
               ElevatedButton(
-                  child: Text('Blue'),
+                  child: const Text('Blue'),
                   onPressed: () {
-                    color = Colors.blue[700];
+                    color = Colors.blue;
                     Navigator.pop(context, color);
                   }),
             ],

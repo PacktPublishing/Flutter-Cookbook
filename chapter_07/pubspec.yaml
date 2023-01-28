@@ -23,9 +23,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: ^0.13.1
-  async: ^2.5.0
-  geolocator: ^7.0.3
+  http: ^0.13.4
+  async: 2.8.1
+  geolocator: ^7.7.0
   
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
