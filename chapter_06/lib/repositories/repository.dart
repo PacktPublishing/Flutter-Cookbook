@@ -1,10 +1,8 @@
-import 'package:flutter/foundation.dart';
-
 abstract class Repository {
   Model create();
 
   List<Model> getAll();
-  Model get(int id);
+  Model? get(int id);
   void update(Model item);
 
   void delete(Model item);
@@ -16,7 +14,7 @@ class Model {
   final Map data;
 
   const Model({
-    @required this.id,
+    required this.id,
     this.data = const {},
   });
 }

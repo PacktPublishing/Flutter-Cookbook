@@ -1,5 +1,4 @@
 import '../repositories/repository.dart';
-import 'package:flutter/foundation.dart';
 
 class Task {
   final int id;
@@ -7,7 +6,7 @@ class Task {
   bool complete;
 
   Task({
-    @required this.id,
+    required this.id,
     this.complete = false,
     this.description = '',
   });

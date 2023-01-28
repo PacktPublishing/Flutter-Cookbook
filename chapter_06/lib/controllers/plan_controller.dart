@@ -23,7 +23,7 @@ class PlanController {
     services.delete(plan);
   }
 
-  void createNewTask(Plan plan, [String description]) {
+  void createNewTask(Plan plan, [String? description]) {
     if (description == null || description.isEmpty) {
       description = 'New Task';
     }
