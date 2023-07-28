@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'stopwatch.dart';
+import './stopwatch.dart';
 
 class LoginScreen extends StatefulWidget {
   static const route = '/login';
+
+  const LoginScreen({Key? key}) : super(key: key);
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String name;
+  late String name;
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -17,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
       ),
       body: Center(
         child: _buildLoginForm(),
@@ -37,14 +40,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: _nameController,
                   decoration: InputDecoration(labelText: 'Runner'),
                   validator: (text) =>
-                      text.isEmpty ? 'Enter the runner\'s name.' : null,
+                      text!.isEmpty ? 'Enter the runner\'s name.' : null,
                 ),
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(labelText: 'Email'),
                   validator: (text) {
-                    if (text.isEmpty) {
+                    if (text!.isEmpty) {
                       return 'Enter the runner\'s email.';
                     }
 
@@ -56,9 +59,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     return null;
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
-                  child: Text('Continue'),
+                  child: const Text('Continue'),
                   onPressed: _validate,
                 ),
               ],
@@ -67,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _validate() {
     final form = _formKey.currentState;
-    if (!form.validate()) {
+    if (!form!.validate()) {
       return;
     }
     final name = _nameController.text;
